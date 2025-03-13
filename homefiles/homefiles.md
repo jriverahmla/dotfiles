@@ -1,6 +1,6 @@
-# Setting Up the .bashrc File
+## Setting Up the .bashrc File
 
-# Editing the `.bashrc` file
+## Editing the `.bashrc` file
 
    Opening the `.bashrc` file:
    ```
@@ -50,7 +50,6 @@ This command was used to copy the .bashrc file to my dotfiles repository
 Write a script
 Create a script file:
 ```nano ~/homefiles/setup_bashrc.sh```
-- ![New script](new_script.png) 
 
 ## Script to Remind User to Reload Environment 
 
@@ -75,7 +74,6 @@ Make the script executable:
 Add / copy the script to the dotfiles repository
 Copy the script:
 ```cp ~/homefiles/setup_bashrc.sh ~/homefiles/setup_bashrc.sh``` 
-- ![Copy script](copy_script.png) 
 
 Test the new .bashrc file
 Rename the current .bashrc file:
@@ -97,7 +95,7 @@ Reload the .bashrc file:
 
 ```source ~/.bashrc_backup```
 use pg and pt
-- ![Error check](error_check.ong)
+- ![Error check](error_check.png)
 If everything works, replace the recovery .bashrc with the new one:
 
 ```mv ~/homefiles/new_bashrc ~/.bashrc```
@@ -115,8 +113,8 @@ https://askubuntu.com/questions/229589/how-to-make-a-file-e-g-a-sh-script-execut
 https://stackoverflow.com/questions/42131982/how-can-i-make-my-shell-script-executable
 https://askubuntu.com/questions/198730/how-to-restore-bashrc-file
 
-Microsoft CoPilot
-Prompts:
-"What script would remind a user to reload the environment?"
-"How do you verify functionality for these two aliases?      alias pg="ping google.com -c 5" and alias pt="ping facebook.com -c 5"     "
-"What commands would I invoke to test all aliases thus far?"
+## Microsoft CoPilot
+## Prompts:
+- "What script would remind a user to reload the environment?"
+- "How do you verify functionality for these two aliases?      alias pg="ping google.com -c 5" and alias pt="ping facebook.com -c 5"     "
+- "What commands would I invoke to test all aliases thus far?"
