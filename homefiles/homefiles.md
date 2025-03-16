@@ -103,6 +103,7 @@ Reload the final .bashrc file:
 
 ```source ~/.bashrc```
 
+
 ## Citations
 
 https://github.com/vikaskyadav/awesome-bash-alias
