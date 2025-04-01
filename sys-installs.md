@@ -81,6 +81,7 @@ https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-
 https://unix.stackexchange.com/questions/519773/find-package-os-distribution-manager-for-automation
 https://ostechnix.com/create-interactive-bash-scripts-with-yes-no-cancel-prompt/
 https://linuxconfig.org/how-to-test-for-installed-package-using-shell-script-on-ubuntu-and-debian
+Microsoft CoPilot: prompts: "What does $software mean? / "What command can users be prompted to type?"
 
 # Full Script
 
