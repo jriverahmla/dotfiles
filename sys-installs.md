@@ -8,6 +8,12 @@ When installing ansible, there are a few commands to run.
 - `sudo add-apt-repository --yes --update ppa:ansible/ansible` is the command that includes the official project’s PPA (personal package archive) in the system’s list of sources: (DigitalOcean)
 - `sudo apt install ansible` installs Ansible
 
+- ![Installing Ansible](ansible_install.png)
+
+- ![Installing Ansible](ansible_install2.png)
+
+- ![Installing Ansible](ansible_install3.png)
+
 ## Scripts
 
 - This is after entering the vim text editor:
@@ -18,10 +24,14 @@ if [ "$EUID" -ne 0 ] <br>
   exit <br>
 fi <br>
 
+- ![Root check](root_check.png)
+
 - For checking if the package manager is apt: <br>
 if command -v apt >/dev/null; then <br>
     echo 'apt is available' <br>
 fi <br>
+
+- ![apt_available](apt_available.png)
 
 - For having the user type `y` or `n` for installs: <br>
 prompt_for_input() { <br>
@@ -48,6 +58,8 @@ prompt_for_input() { <br>
     done <br>
 } <br>
 
+- ![User choice to install](install.png)
+
 - Checks to see if software exists:
 dpkg -s $1 &> /dev/null <br>
 
@@ -57,9 +69,13 @@ else <br>
     echo "Package $1 is NOT installed!" <br>
 fi <br>
 
+- ![Check if software exists](software.png)
+
 - Shadow download software <br>
 Uses the command `echo "Software is installing now` <br>
 `sudo apt install -y $software` to install <br>
+
+- ![Shadow download](shadow_download.png)
 
 ## User prompt for install
 if [[ $? -eq 0 ]]; then <br>
@@ -68,9 +84,12 @@ else <br>
   echo "Installation failed." <br>
 fi <br>
 
+- ![Prompt for install](install_prompt.png)
+
 - Saves the script and makes it executable:
 - `chmod +x install_script.sh`
 - `sudo ./install_script.sh` runs the script
+
 ## Cited resources
 
 https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu
