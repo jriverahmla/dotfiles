@@ -20,18 +20,39 @@ When installing ansible, there are a few commands to run.
 
 - For checking if the EUID is running as root:
 ```
-if [ "$EUID" -ne 0 ] 
-  then echo "Please run as root"
-  exit 
-fi 
+
+if [[ $EUID -ne 0 ]]; then
+  echo "Please run as root."
+  exit 1
+fi
+
 ```
 - ![Root check](root_check.png)
 
 - For checking if the package manager is apt: 
 ```
-if command -v apt >/dev/null; then 
-    echo 'apt is available' 
-fi 
+
+if command -v apt >/dev/null; then
+    echo 'apt is available'
+    prompt_for_input
+    case $? in
+        0)
+            echo "Updating the system..."
+            sudo apt update && sudo apt upgrade -y
+            ;;
+        1)
+            echo "Skipping system update."
+            ;;
+        2)
+            echo "Update canceled."
+            exit 0
+            ;;
+    esac
+else
+    echo 'apt is not available'
+    exit 1
+fi
+
 ```
 - ![apt_available](apt_available.png)
 
@@ -152,13 +173,12 @@ prompt_for_input() {
 ```
 ## Checks name of software or software exists
 ```
-dpkg -s $1 &> /dev/null
 
-if [ $? -eq 0 ]; then
-    echo "Package $1 is installed!"
+if dpkg -s "$software" &> /dev/null; then
+    echo "Package $software is installed!"
 else
-    echo "Package $1 is NOT installed!"
-fi
+    echo "Package $software is NOT installed!"
+
 ```
 ## Shadow downloads software
 ```
