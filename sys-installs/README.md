@@ -18,72 +18,77 @@ When installing ansible, there are a few commands to run.
 
 - This is after entering the vim text editor:
 
-- For checking if the EUID is running as root: <br>
-if [ "$EUID" -ne 0 ] <br>
-  then echo "Please run as root"<br>
-  exit <br>
-fi <br>
-
+- For checking if the EUID is running as root:
+```
+if [ "$EUID" -ne 0 ] 
+  then echo "Please run as root"
+  exit 
+fi 
+```
 - ![Root check](root_check.png)
 
-- For checking if the package manager is apt: <br>
-if command -v apt >/dev/null; then <br>
-    echo 'apt is available' <br>
-fi <br>
-
+- For checking if the package manager is apt: 
+```
+if command -v apt >/dev/null; then 
+    echo 'apt is available' 
+fi 
+```
 - ![apt_available](apt_available.png)
 
-- For having the user type `y` or `n` for installs: <br>
-prompt_for_input() { <br>
-    while true; do <br>
-        echo -n "Do you want to update the system? (y/n/c): " <br>
-        read -r response <br>
-        case "$response" in <br>
-            [Yy]* ) <br>
-                echo "You selected Yes." <br>
-                return 0 <br>
-                ;; <br>
-            [Nn]* ) <br>
-                echo "You selected No." <br>
-                return 1 <br>
-                ;; <br>
-            [Cc]* ) <br>
-                echo "You selected Cancel." <br>
-                return 2 <br>
-                ;; <br>
-            * ) <br>
-                echo "Invalid input. Please enter y, n, or c." <br>
-                ;; <br>
-        esac <br>
-    done <br>
-} <br>
-
+- For having the user type `y` or `n` for installs: 
+```
+prompt_for_input() { 
+    while true; do 
+        echo -n "Do you want to update the system? (y/n/c): " 
+        read -r response 
+        case "$response" in 
+            [Yy]* ) 
+                echo "You selected Yes." 
+                return 0 
+                ;; 
+            [Nn]* ) 
+                echo "You selected No." 
+                return 1 
+                ;; 
+            [Cc]* ) 
+                echo "You selected Cancel." 
+                return 2 
+                ;; 
+            * ) 
+                echo "Invalid input. Please enter y, n, or c." 
+                ;; 
+        esac 
+    done 
+} 
+```
 - ![User choice to install](install.png)
 
 - Checks to see if software exists:
-dpkg -s $1 &> /dev/null <br>
+```
+dpkg -s $1 &> /dev/null 
 
-if [ $? -eq 0 ]; then <br>
-    echo "Package $1 is installed!" <br>
-else <br>
-    echo "Package $1 is NOT installed!" <br>
-fi <br>
-
+if [ $? -eq 0 ]; then 
+    echo "Package $1 is installed!" 
+else 
+    echo "Package $1 is NOT installed!" 
+fi 
+```
 - ![Check if software exists](software.png)
 
-- Shadow download software <br>
-Uses the command `echo "Software is installing now` <br>
-`sudo apt install -y $software` to install <br>
+- Shadow download software 
+Uses the command `echo "Software is installing now` 
+`sudo apt install -y $software` to install 
 
 - ![Shadow download](shadow_download.png)
 
 ## User prompt for install
-if [[ $? -eq 0 ]]; then <br>
-  echo "Installation complete. You can run '$software' to try it." <br>
-else <br>
-  echo "Installation failed." <br>
-fi <br>
-
+```
+if [[ $? -eq 0 ]]; then 
+  echo "Installation complete. You can run '$software' to try it." 
+else 
+  echo "Installation failed." 
+fi 
+```
 - ![Prompt for install](install_prompt.png)
 
 - Saves the script and makes it executable:
@@ -92,72 +97,79 @@ fi <br>
 
 ## Cited resources
 
-https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu
-https://linuxhandbook.com/install-ansible-linux/
-https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-22-04
-https://askubuntu.com/questions/1000118/what-is-software-properties-common
-https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script
-https://unix.stackexchange.com/questions/519773/find-package-os-distribution-manager-for-automation
-https://ostechnix.com/create-interactive-bash-scripts-with-yes-no-cancel-prompt/
-https://linuxconfig.org/how-to-test-for-installed-package-using-shell-script-on-ubuntu-and-debian
-Microsoft CoPilot: prompts: "What does $software mean? / "What command can users be prompted to type?"
+- [Ansible Install](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu)
+- [Linux Ansible Install](https://linuxhandbook.com/install-ansible-linux/)
+- [Ansible Install and Configure](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-22-04)
+- [Software PPA](https://askubuntu.com/questions/1000118/what-is-software-properties-common)
+- [Root Check Script](https://stackoverflow.com/questions/18215973/how-to-check-if-running-as-root-in-a-bash-script)
+- [Find Package](https://unix.stackexchange.com/questions/519773/find-package-os-distribution-manager-for-automation)
+- [Creating a Yes-No Prompt](https://ostechnix.com/create-interactive-bash-scripts-with-yes-no-cancel-prompt/)
+- [Testing and Install Script](https://linuxconfig.org/how-to-test-for-installed-package-using-shell-script-on-ubuntu-and-debian)
+-  Microsoft CoPilot: prompts: "What does $software mean? / "What command can users be prompted to type?"
 
 # Full Script
 
 #!/bin/bash
 
 ## Check if running as root
-if [[ $EUID -ne 0 ]]; then<br>
-  echo "Please run as root."<br>
-  exit 1<br>
-fi<br>
-
+```
+if [[ $EUID -ne 0 ]]; then
+  echo "Please run as root."
+  exit 1
+fi
+```
 ## Check if apt is available
-if command -v apt >/dev/null; then<br>
-    echo 'apt is available'<br>
-fi<br>
-
+```
+if command -v apt >/dev/null; then
+    echo 'apt is available'
+fi
+```
 ## User's choice to install or not
-prompt_for_input() {<br>
-    while true; do<br>
-        echo -n "Do you want to update the system? (y/n/c): "<br>
-        read -r response<br>
-        case "$response" in<br>
-            [Yy]* )<br>
-                echo "You selected Yes."<br>
-                return 0<br>
-                ;;<br>
-            [Nn]* )<br>
-                echo "You selected No."<br>
-                return 1<br>
-                ;;<br>
-            [Cc]* )<br>
-                echo "You selected Cancel."<br>
-                return 2<br>
-                ;;<br>
-            * )<br>
-                echo "Invalid input. Please enter y, n, or c."<br>
-                ;;<br>
-        esac<br>
-    done<br>
-}<br>
-
+```
+prompt_for_input() {
+    while true; do
+        echo -n "Do you want to update the system? (y/n/c): "
+        read -r response
+        case "$response" in
+            [Yy]* )
+                echo "You selected Yes."
+                return 0
+                ;;
+            [Nn]* )
+                echo "You selected No."
+                return 1
+                ;;
+            [Cc]* )
+                echo "You selected Cancel."
+                return 2
+                ;;
+            * )
+                echo "Invalid input. Please enter y, n, or c."
+                ;;
+        esac
+    done
+}
+```
 ## Checks name of software or software exists
-dpkg -s $1 &> /dev/null<br>
+```
+dpkg -s $1 &> /dev/null
 
-if [ $? -eq 0 ]; then<br>
-    echo "Package $1 is installed!"<br>
-else<br>
-    echo "Package $1 is NOT installed!"<br>
-fi<br>
-
+if [ $? -eq 0 ]; then
+    echo "Package $1 is installed!"
+else
+    echo "Package $1 is NOT installed!"
+fi
+```
 ## Shadow downloads software
-echo "Software is installing now<br>
-sudo apt install -y $software<br>
-
+```
+echo "Software is installing now
+sudo apt install -y $software
+```
 ## User prompt for install
-if [[ $? -eq 0 ]]; then<br>
-  echo "Installation complete. You can run '$software' to try it."<br>
-else<br>
-  echo "Installation failed."<br>
-fi<br>
+```
+if [[ $? -eq 0 ]]; then
+  echo "Installation complete. You can run '$software' to try it."
+else
+  echo "Installation failed."
+fi
+```
