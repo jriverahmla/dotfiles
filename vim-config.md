@@ -1,11 +1,11 @@
 # Vim Config
 
 ## Cloning the Repo and Running the Script
-1. Clone the repository:
+- Clone the repository:
     ```bash
     git clone https://github.com/jriverahmla/vim-config.git
     ```
-2. Installing Vundle adding plugins and a color scheme
+- Installing Vundle adding plugins and a color scheme
    using this script within the vimrc file, this will install Vundle, adds the plugins, adds the jellybeans color scheme and adds a plugin for autocompletion
 
 ```
